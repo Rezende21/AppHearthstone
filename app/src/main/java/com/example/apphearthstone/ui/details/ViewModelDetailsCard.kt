@@ -1,31 +1,39 @@
-package com.example.apphearthstone.fragment.details
+package com.example.apphearthstone.ui.details
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.apphearthstone.model.HearthstoneModel
+import com.example.apphearthstone.data.remote.HearthstoneModel
+import com.example.apphearthstone.repository.Repository
 import com.example.apphearthstone.repository.RepositoryHearthstone
 import com.example.apphearthstone.state.HearthstoneState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
 import java.lang.Exception
+import javax.inject.Inject
 
-class ViewModelDetailsCard : ViewModel() {
+@HiltViewModel
+class ViewModelDetailsCard @Inject constructor(
+    private val repository: Repository
+) : ViewModel() {
 
-    private val repository = RepositoryHearthstone()
-    var result : MutableLiveData<HearthstoneState<List<HearthstoneModel>>> = MutableLiveData()
+
+    private var _result = MutableLiveData<HearthstoneState<List<HearthstoneModel>>>()
+    val result : LiveData<HearthstoneState<List<HearthstoneModel>>> = _result
 
     fun serchSingleCard(cardId: String) {
         viewModelScope.launch {
-            result.value = HearthstoneState.Loading()
+            _result.value = HearthstoneState.Loading()
             try {
                 val searchCard = repository.serchSingleCard(cardId)
-                result.value = setResultState(searchCard)
+                _result.value = setResultState(searchCard)
             } catch (e : Exception) {
                 when(e) {
-                    is IOException -> result.value = HearthstoneState.Error("Nao foi possivel fazer a conecxão")
-                    else -> result.value = HearthstoneState.Error("Nao foi possivel fazer a conecxão")
+                    is IOException -> _result.value = HearthstoneState.Error("Nao foi possivel fazer a conecxão")
+                    else -> _result.value = HearthstoneState.Error("Nao foi possivel fazer a conecxão")
                 }
             }
         }

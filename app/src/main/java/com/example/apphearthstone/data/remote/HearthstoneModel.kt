@@ -1,4 +1,4 @@
-package com.example.apphearthstone.model
+package com.example.apphearthstone.data.remote
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

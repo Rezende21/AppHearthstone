@@ -1,4 +1,4 @@
-package com.example.apphearthstone.fragment.classcard
+package com.example.apphearthstone.ui.classcard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.apphearthstone.databinding.FragmentClassHeathstoneBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ClassHeathstoneFragment : Fragment() {
 
     private val binding by lazy { FragmentClassHeathstoneBinding.inflate(layoutInflater) }

@@ -1,4 +1,4 @@
-package com.example.apphearthstone.fragment.details
+package com.example.apphearthstone.ui.details
 
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.apphearthstone.databinding.FragmentDetailsCardBinding
 import com.example.apphearthstone.state.HearthstoneState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsCardFragment : Fragment() {
 
     private val binding by lazy { FragmentDetailsCardBinding.inflate(layoutInflater) }
@@ -46,7 +48,7 @@ class DetailsCardFragment : Fragment() {
                     binding.loadingBar.show()
                 }
                 is HearthstoneState.Error -> {
-                    Toast.makeText(requireContext(), "Nâo foi possivel encontra Carta", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), it.message , Toast.LENGTH_LONG).show()
                     Log.e("DetailsCard", it.message.toString())
                     activity?.onBackPressed()
                 }

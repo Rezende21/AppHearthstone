@@ -1,4 +1,4 @@
-package com.example.apphearthstone.fragment.list
+package com.example.apphearthstone.ui.list
 
 import android.os.Bundle
 import android.util.Log
@@ -12,16 +12,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.apphearthstone.adapter.AdapterHearthstone
 import com.example.apphearthstone.databinding.FragmentListCardsBinding
-import com.example.apphearthstone.model.HearthstoneModel
+import com.example.apphearthstone.data.remote.HearthstoneModel
 import com.example.apphearthstone.state.HearthstoneState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListCardsFragment : Fragment() {
 
     private val binding by lazy { FragmentListCardsBinding.inflate(layoutInflater) }
     private val adapter by lazy { AdapterHearthstone {
         onDetailsCard(it)
     }}
-    private val viewModelHearthstone : ViewModelHearthstone by viewModels()
+    private val viewModelHearthstone by viewModels<ViewModelHearthstone>()
     private val args : ListCardsFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -34,20 +36,22 @@ class ListCardsFragment : Fragment() {
     }
 
     private fun initViewWithCards(cardView : String) {
+        binding.loadingProgress.show()
         binding.recycleView.adapter = adapter
         viewModelHearthstone.getCardFromClass(cardView)
         viewModelHearthstone.results.observe(viewLifecycleOwner) {
             when(it) {
                 is HearthstoneState.Success -> {
                     adapter.submitList(it.data)
+                    binding.loadingProgress.hide()
                 }
                 is HearthstoneState.Loading -> {
-
+                    binding.loadingProgress.show()
                 }
                 is HearthstoneState.Error -> {
-                    Toast.makeText(requireContext(), "Nâo foi possivel encontra Carta", Toast.LENGTH_LONG).show()
+                    binding.loadingProgress.hide()
+                    Toast.makeText(requireContext(), it.message , Toast.LENGTH_LONG).show()
                     Log.e("ListCard", it.message.toString())
-                    activity?.onBackPressed()
                 }
             }
         }

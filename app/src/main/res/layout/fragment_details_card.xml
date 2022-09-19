@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background"
-        tools:context=".fragment.details.DetailsCardFragment">
+        tools:context=".ui.details.DetailsCardFragment">
 
         <TextView
             android:id="@+id/txtNome"

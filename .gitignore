@@ -40,3 +40,4 @@ obj/
 /.idea/libraries
 /build
 /captures
+gradle.properties

@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:background="@color/background"
     android:layout_height="wrap_content"
-    tools:context=".fragment.classcard.ClassHeathstoneFragment">
+    tools:context=".ui.classcard.ClassHeathstoneFragment">
 
     <Button
         android:id="@+id/bt_demonHunter"

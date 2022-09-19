@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apphearthstone.databinding.RowRecycleBinding
-import com.example.apphearthstone.model.HearthstoneModel
+import com.example.apphearthstone.data.remote.HearthstoneModel
 
 class AdapterHearthstone(private val onclick : (HearthstoneModel) -> Unit) :
     ListAdapter<HearthstoneModel, AdapterHearthstone.MyViewHolder>(DiffCallback()) {

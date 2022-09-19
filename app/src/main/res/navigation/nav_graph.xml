@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listCardsFragment"
-        android:name="com.example.apphearthstone.fragment.list.ListCardsFragment"
+        android:name="com.example.apphearthstone.ui.list.ListCardsFragment"
         android:label="fragment_list_cards"
         tools:layout="@layout/fragment_list_cards" >
         <action
@@ -16,25 +16,19 @@
         <argument
             android:name="cardview"
             app:argType="string" />
-        <action
-            android:id="@+id/action_listCardsFragment_to_classHeathstoneFragment"
-            app:destination="@id/classHeathstoneFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsCardFragment"
-        android:name="com.example.apphearthstone.fragment.details.DetailsCardFragment"
+        android:name="com.example.apphearthstone.ui.details.DetailsCardFragment"
         android:label="fragment_details_card"
         tools:layout="@layout/fragment_details_card" >
         <argument
             android:name="cardid"
-            app:argType="com.example.apphearthstone.model.HearthstoneModel" />
-        <action
-            android:id="@+id/action_detailsCardFragment_to_listCardsFragment"
-            app:destination="@id/listCardsFragment" />
+            app:argType="com.example.apphearthstone.data.remote.HearthstoneModel" />
     </fragment>
     <fragment
         android:id="@+id/classHeathstoneFragment"
-        android:name="com.example.apphearthstone.fragment.classcard.ClassHeathstoneFragment"
+        android:name="com.example.apphearthstone.ui.classcard.ClassHeathstoneFragment"
         android:label="ClassHeathstoneFragment"
         tools:layout="@layout/fragment_class_heathstone">
         <action
